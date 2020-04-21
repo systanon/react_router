@@ -1,20 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
+import {
+  createBrowserHistory,
+} from 'history';
+import {
+  Router,
+} from 'react-router-dom';
+
+import { Header } from './components/Header';
+import { AppRouter } from './router/AppRouter';
 
 import './App.css';
 
-function App() {
+const history = createBrowserHistory();
+
+export default function App() {
+  const [isLogged, toggleLoggingState] = useState(false);
+
   return (
-    <div className="App">
-      <div className="sidebar">
-        <ul className="sidebar-list">
-          <li className="sidebar-list-item">Home</li>
-        </ul>
-      </div>
-      <div className="content">
-        App content
-      </div>
-    </div>
+    <Router history={history}>
+      <Header isLogged={isLogged} toggleLoggingState={toggleLoggingState} />
+      <AppRouter isLogged={isLogged} toggleLoggingState={toggleLoggingState} />
+    </Router>
   );
 }
-
-export default App;
